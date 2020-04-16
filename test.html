@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style>
+        span {
+            position: absolute;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+
+    let span_id = 1
+    let left = 10
+    function createspan(span_title) {
+        return new Promise(resolve => {
+            let span = document.createElement("span")
+            let text = document.createTextNode(span_title)
+            span.appendChild(text)
+            span.style.overflow='hidden'
+            span.dataset.move_id = `span_${span_id}`
+            span.style.position = 'absolute'
+            document.body.appendChild(span)
+            span_id++
+            resolve()
+        })
+    }
+
+    async function createStart() {
+        await createspan('你')
+        await createspan('爱')
+        await createspan('的')
+        await createspan('不')
+        await createspan('是')
+        await createspan('我')
+        await createspan('而')
+        await createspan('是')
+        await createspan('这')
+        await createspan('个')
+        await createspan('世')
+        await createspan('界')
+        return 1
+    }
+
+    createStart().then(res=>{
+        if (res==1)
+            addlistener()
+    })
+
+    function addlistener() {
+        let spans = document.querySelectorAll("span")
+        spans = Array.from(spans)
+        spans.filter(value =>{
+            return value.dataset.id
+        })
+        spans.forEach(span=>{
+            span.style.left = `${left}`
+            left+=30
+        })
+        document.addEventListener("mousemove", function (e) {
+            for (let i = 0; i <spans.length ; i++) {
+                setTimeout(function () {
+                    spans[i].style.top = `${e.clientY}px`
+                    spans[i].style.left = `${e.clientX+30*(i+1)}px`
+                },i*50)
+            }
+        })
+    }
+
+
+
+
+
+</script>
+</body>
+</html>
