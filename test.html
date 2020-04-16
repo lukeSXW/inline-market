@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title>test</title>
     <style>
-        span {
-            position: absolute;
-            font-size: 30px;
+        body{
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
+
+<span>我是别的span</span>
 
 <script>
 
@@ -54,9 +55,10 @@
     function addlistener() {
         let spans = document.querySelectorAll("span")
         spans = Array.from(spans)
-        spans.filter(value =>{
-            return value.dataset.id
+        spans =  spans.filter(value =>{
+            return value.dataset.move_id
         })
+        console.log(spans)
         spans.forEach(span=>{
             span.style.left = `${left}`
             left+=30
