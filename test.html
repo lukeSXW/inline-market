@@ -63,14 +63,27 @@
             span.style.left = `${left}`
             left+=30
         })
-        document.addEventListener("mousemove", function (e) {
+        document.addEventListener("mousemove", function (ev) {
+
+
             for (let i = 0; i <spans.length ; i++) {
                 setTimeout(function () {
-                    spans[i].style.top = `${e.clientY}px`
-                    spans[i].style.left = `${e.clientX+30*(i+1)}px`
+                    spans[i].style.left = `${mousePosition(ev).x+30*(i+1)}px`
+                    spans[i].style.top = `${mousePosition(ev).y}px`
                 },i*50)
             }
         })
+    }
+
+
+    function mousePosition(ev){
+        if(ev.pageX || ev.pageY){
+            return {x:ev.pageX, y:ev.pageY};
+        }
+        return {
+            x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+            y:ev.clientY + document.body.scrollTop  - document.body.clientTop
+        };
     }
 
 
