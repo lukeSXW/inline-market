@@ -11,7 +11,6 @@
 </head>
 <body>
 
-<span>我是别的span</span>
 
 <script>
 
@@ -20,6 +19,7 @@
     function createspan(span_title) {
         return new Promise(resolve => {
             let span = document.createElement("span")
+            span.style.cursor=`default`
             let text = document.createTextNode(span_title)
             span.appendChild(text)
             span.style.overflow='hidden'
@@ -66,10 +66,10 @@
         document.addEventListener("mousemove", function (ev) {
 
 
-            for (let i = 0; i <spans.length ; i++) {
+            for (let i = 0; i <spans.length; i++) {
                 setTimeout(function () {
-                    spans[i].style.left = `${mousePosition(ev).x+30*(i+1)}px`
-                    spans[i].style.top = `${mousePosition(ev).y}px`
+                    spans[i].style.left = `${mousePosition(ev).x+30*(i+1)-(spans.length+1)*15}px`
+                    spans[i].style.top = `${mousePosition(ev).y-30}px`
                 },i*50)
             }
         })
